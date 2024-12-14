@@ -1,0 +1,45 @@
+# input
+tokenizer_pt: "workdir/1_prepare_pretrain_dataset/tokenizer.json"
+arch_tokenizer_pt: "workdir/1_prepare_pretrain_dataset/architecture_tokenizer.json"
+len_tokenizer: 261 
+len_arch_tokenizer: 13 
+input_length: 512 
+layers: 12  
+projection_dim: 768
+workers: 32 
+
+# pretrain options
+seed: 42 
+batch_size: 4
+start_epoch: 0  
+epochs: 5  
+finetune_freeze: False 
+
+# pretrain model options
+backbone: "RoBerta" 
+ckpt: "../checkpoint-200000" 
+
+# loss options
+optimizer: "Adam" 
+weight_decay: 1.0e-6 
+temperature: 0.5 
+mixed_precision: False 
+
+# reload options
+model_path: "workdir/6_reload_then_finetune/x64/funcname/roberta/1GB/1_9/100per" 
+reload: True 
+epoch_num: 8 
+
+# finetune options
+dataset_arch: "x86" 
+MLM_pretrain: True 
+MLM_pretrain_baseline_epoch: 10
+logistic_batch_size: 96 
+logistic_epochs: 101 
+logistic_start_epoch: 0 
+
+# log
+show_step: 100  
+save_epoch: 10 
+validation_epoch: 10 
+early_stopping_patience: 3
